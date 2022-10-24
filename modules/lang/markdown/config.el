@@ -83,6 +83,8 @@ capture, the end position, and the output buffer.")
     :override #'markdown-match-generic-metadata
     (ignore (goto-char (point-max))))
 
+  ;; HACK markdown links not setting jump buffer
+  (advice-add #'markdown-follow-wiki-link :around #'doom-set-jump-a)
   (map! :map markdown-mode-map
         :localleader
         "'" #'markdown-edit-code-block
